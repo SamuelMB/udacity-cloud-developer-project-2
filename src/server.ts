@@ -1,6 +1,11 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { filterImageFromURL, deleteLocalFiles } from "./util/util";
+import {
+  filterImageFromURL,
+  deleteLocalFiles,
+  getListOfFiles
+} from "./util/util";
+import { error } from "util";
 
 (async () => {
   // Init the Express application
@@ -32,11 +37,12 @@ import { filterImageFromURL, deleteLocalFiles } from "./util/util";
       try {
         const imagePath = await filterImageFromURL(imageUrl);
         res.sendFile(imagePath);
+        await deleteLocalFiles(await getListOfFiles(imagePath));
       } catch (error) {
         res.status(422).send({ error: error.message });
       }
     } else {
-      res.status(400).send({ error: "Image URL is required!" });
+      res.status(400).send({ error: "Param image_url is required!" });
     }
   });
   /**************************************************************************** */

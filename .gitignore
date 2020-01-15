@@ -2,6 +2,8 @@
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# Project Files
 /node_modules/
 /.idea
 /src/util/tmp/
