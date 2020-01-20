@@ -5,7 +5,7 @@ import {
   deleteLocalFiles,
   getListOfFiles
 } from "./util/util";
-import { error } from "util";
+import { Request, Response } from "express";
 
 (async () => {
   // Init the Express application
@@ -31,7 +31,7 @@ import { error } from "util";
   // RETURNS
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
-  app.get("/filteredimage", async (req, res) => {
+  app.get("/filteredimage", async (req: Request, res: Response) => {
     const imageUrl = req.query.image_url;
     if (imageUrl) {
       try {
@@ -51,7 +51,7 @@ import { error } from "util";
 
   // Root Endpoint
   // Displays a simple message to the user
-  app.get("/", async (req, res) => {
+  app.get("/", async (req: Request, res: Response) => {
     res.send("try GET /filteredimage?image_url={{}}");
   });
 
